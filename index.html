@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erdinç YILMAZ - Software Test Automation Engineer | iOS Developer | Open Source Contributor</title>
+    <title>Erdinç YILMAZ - Software Test Automation Engineer | Mobile Developer | Open Source Contributor</title>
     <meta name="description"
-        content="Portfolio of Erdinç Yılmaz, Mobile Application Developer, iOS Developer, SwiftUI & UIKit Expert, and Open Source Contributor.">
+        content="Portfolio of Erdinç Yılmaz, Mobile Application Developer, Mobile Developer, SwiftUI & UIKit Expert, and Open Source Contributor.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,14 +172,29 @@
             opacity: 1;
             transform: translateY(0);
         }
+        html { scroll-padding-top: 100px; }
+        a:focus-visible, button:focus-visible { outline: 2px solid #00f5ff; outline-offset: 4px; }
+        #mobile-menu { max-height: calc(100dvh - 80px); overflow-y: auto; }
+        @media (max-width: 640px) {
+            #navbar .flex-shrink-0 > a { font-size: 17px; }
+            #navbar .gap-4 { gap: 8px; }
+            #navbar button[id^="lang-"] { padding-left: 8px; padding-right: 8px; }
+            #about h2 { height: auto; min-height: 88px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
+            .cursor-dot, .cursor-outline { display: none; }
+        }
     </style>
 </head>
 
 <body class="bg-dark text-gray-300 font-sans antialiased selection:bg-primary selection:text-black overflow-x-hidden">
 
     <!-- Custom Cursor -->
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
+    <div class="cursor-dot hidden xl:block"></div>
+    <div class="cursor-outline hidden xl:block"></div>
 
     <!-- Background Effects -->
     <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
@@ -205,11 +220,12 @@
                             class="text-primary">&gt;</span>
                     </a>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
+                <div class="hidden xl:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
                         <a href="#about"
                             class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                             data-tr="Hakkımda" data-en="About">About</a>
+                        <a href="#ai-knowledge" class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">AI Knowledge</a>
                         <a href="#skills"
                             class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                             data-tr="Yetenekler" data-en="Skills">Skills</a>
@@ -224,7 +240,7 @@
                             data-tr="Blog" data-en="Blog">Blog</a>
                         <a href="#certs"
                             class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                            data-tr="Sertifikalar" data-en="Certifications">Certifications</a>
+                            data-tr="AI Eğitimleri" data-en="AI Training">AI Training</a>
                         <a href="#contact"
                             class="hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                             data-tr="İletişim" data-en="Contact">Contact</a>
@@ -237,7 +253,7 @@
                         <button id="lang-en"
                             class="px-3 py-1 rounded-full text-xs font-bold bg-primary text-black shadow-[0_0_10px_rgba(0,245,255,0.5)]">EN</button>
                     </div>
-                    <div class="-mr-2 flex md:hidden">
+                    <div class="-mr-2 flex xl:hidden">
                         <button type="button"
                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none"
                             aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
@@ -250,10 +266,11 @@
         </div>
 
         <!-- Mobile menu -->
-        <div class="md:hidden hidden glass border-t border-white/10" id="mobile-menu">
+        <div class="xl:hidden hidden glass border-t border-white/10" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     data-tr="Hakkımda" data-en="About">About</a>
+                <a href="#ai-knowledge" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">AI Knowledge</a>
                 <a href="#skills"
                     class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     data-tr="Yetenekler" data-en="Skills">Skills</a>
@@ -267,7 +284,7 @@
                     data-tr="Blog" data-en="Blog">Blog</a>
                 <a href="#certs"
                     class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    data-tr="Sertifikalar" data-en="Certifications">Certifications</a>
+                    data-tr="AI Eğitimleri" data-en="AI Training">AI Training</a>
                 <a href="#contact"
                     class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     data-tr="İletişim" data-en="Contact">Contact</a>
@@ -292,10 +309,10 @@
                     <span id="typing-text" class="border-r-2 border-primary pr-1"></span>
                 </h2>
                 <p class="text-lg text-gray-400 mb-10 max-w-2xl leading-relaxed"
-                    data-tr="Yüksek trafikli platformlar için web ve mobil istemci test süreçlerini yönetiyorum. Test otomasyonu ve iOS uygulama geliştirme ile ilgileniyorum. Ayrıca ODTÜ Jeoloji Mühendisliği ve Anadolu Üniversitesi YBS bölümlerinde eğitimime devam ediyorum."
-                    data-en="I manage web and mobile client testing processes for high-traffic platforms. In addition to test automation, I actively engage in iOS application development. I am also a believer in multidisciplinary learning, currently pursuing degrees in Geological Engineering at METU and MIS at Anadolu University.">
+                    data-tr="Yüksek trafikli platformlar için web ve mobil istemci test süreçlerini yönetiyorum. Test otomasyonu ve mobil uygulama geliştirme ile ilgileniyorum. Ayrıca ODTÜ Jeoloji Mühendisliği ve Anadolu Üniversitesi YBS bölümlerinde eğitimime devam ediyorum."
+                    data-en="I manage web and mobile client testing processes for high-traffic platforms. In addition to test automation, I actively engage in mobile application development. I am also a believer in multidisciplinary learning, currently pursuing degrees in Geological Engineering at METU and MIS at Anadolu University.">
                     I manage web and mobile client testing processes for high-traffic platforms. In addition to test
-                    automation, I actively engage in iOS application development. I am also a believer in
+                    automation, I actively engage in mobile application development. I am also a believer in
                     multidisciplinary learning, currently pursuing degrees in Geological Engineering at METU and MIS at
                     Anadolu University.
                 </p>
@@ -315,19 +332,19 @@
 
                 <div class="mt-12 flex items-center justify-center md:justify-start gap-6 text-2xl text-gray-400">
                     <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank"
-                        class="hover:text-primary transition-colors transform hover:scale-110"><i
+                        class="hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
                             class="fab fa-linkedin"></i></a>
                     <a href="https://github.com/erdncyz" target="_blank"
-                        class="hover:text-primary transition-colors transform hover:scale-110"><i
+                        class="hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
                             class="fab fa-github"></i></a>
                     <a href="https://www.instagram.com/erdncyz/#" target="_blank"
-                        class="hover:text-accent transition-colors transform hover:scale-110"><i
+                        class="hover:text-accent transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
                             class="fab fa-instagram"></i></a>
                     <a href="https://medium.com/@erdncyz" target="_blank"
-                        class="hover:text-white transition-colors transform hover:scale-110"><i
+                        class="hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
                             class="fab fa-medium"></i></a>
                     <a href="https://x.com/erdnc_ylmaz" target="_blank"
-                        class="hover:text-white transition-colors transform hover:scale-110"><i
+                        class="hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
                             class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
@@ -378,7 +395,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-white">Digiturk</h3>
-                        <p class="text-gray-400 text-sm" data-tr="Tam zamanlı · 3 yıl 11 ay" data-en="Full-time · 3 yrs 11 mos">Full-time · 3 yrs 11 mos</p>
+                        <p class="text-gray-400 text-sm" data-tr="Tam zamanlı · 4 yıl 11 ay" data-en="Full-time · 4 yrs 11 mos">Full-time · 4 yrs 11 mos</p>
                     </div>
                 </div>
 
@@ -394,7 +411,7 @@
                         </div>
                         <div class="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-4">
                             <span class="flex items-center gap-2"><i class="fas fa-building text-secondary"></i> beIN Media Group</span>
-                            <span class="flex items-center gap-2"><i class="fas fa-calendar text-primary"></i> <span data-tr="Haz 2025 - Halen · 1 yıl 2 ay" data-en="Jun 2025 - Present · 1 yr 2 mos">Jun 2025 - Present · 1 yr 2 mos</span></span>
+                            <span class="flex items-center gap-2"><i class="fas fa-calendar text-primary"></i> <span data-tr="Haz 2025 - Halen" data-en="Jun 2025 - Present">Jun 2025 - Present</span></span>
                         </div>
                         <div class="flex flex-wrap items-center gap-2 text-gray-400 text-sm mb-4">
                             <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-accent"></i> İstanbul, Türkiye</span>
@@ -422,7 +439,7 @@
                         </div>
                         <div class="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-4">
                             <span class="flex items-center gap-2"><i class="fas fa-building text-secondary"></i> beIN Media Group</span>
-                            <span class="flex items-center gap-2"><i class="fas fa-calendar text-primary"></i> <span data-tr="Mar 2022 - Halen · 4 yıl 5 ay" data-en="Mar 2022 - Present · 4 yrs 5 mos">Mar 2022 - Present · 4 yrs 5 mos</span></span>
+                            <span class="flex items-center gap-2"><i class="fas fa-calendar text-primary"></i> <span data-tr="Mar 2022 - Halen" data-en="Mar 2022 - Present">Mar 2022 - Present</span></span>
                         </div>
                         <div class="flex flex-wrap items-center gap-2 text-gray-400 text-sm mb-4">
                             <span class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-accent"></i> İstanbul, Türkiye</span>
@@ -496,15 +513,15 @@
                     </p>
                 </div>
 
-                <!-- Card New: iOS Development -->
+                <!-- Card New: Mobile Development -->
                 <div
                     class="glass-card p-8 rounded-2xl hover:transform hover:-translate-y-2 transition-all duration-300 group reveal">
                     <div
                         class="w-14 h-14 bg-blue-600/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600/20 transition-colors">
                         <i class="fab fa-apple text-2xl text-blue-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-white" data-tr="iOS Geliştirme" data-en="iOS Development">
-                        iOS Development</h3>
+                    <h3 class="text-xl font-bold mb-3 text-white" data-tr="Mobil Geliştirme" data-en="Mobile Development">
+                        Mobile Development</h3>
                     <p class="text-gray-400 text-sm leading-relaxed"
                         data-tr="Swift ve SwiftUI kullanarak modern, kullanıcı dostu iOS uygulamaları geliştiriyorum. Mobil teknolojilere olan tutkumla ürün kalitesine katkı sağlıyorum."
                         data-en="I develop modern, user-friendly iOS applications using Swift and SwiftUI. I contribute to product quality with my passion for mobile technologies.">
@@ -648,6 +665,7 @@
                 <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
             </div>
 
+            <div class="glass-card p-6 md:p-8 rounded-2xl mb-10 reveal"><div><span class="text-primary text-xs font-mono tracking-widest">AI TOOLKIT</span><h3 class="text-xl text-white font-bold mt-3 mb-2" data-tr="Yapay Zeka Yetenekleri" data-en="AI Skills">AI Skills</h3><p class="text-gray-400 text-sm" data-tr="Eğitimden uygulamaya: yapay zeka ile geliştirme." data-en="From learning to practice: developing with AI.">From learning to practice: developing with AI.</p></div><div class="flex flex-wrap gap-3 mt-6"><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">Prompt Engineering</span><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">AI Fluency</span><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">Claude</span><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">Anthropic API</span><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">Claude Code</span><span class="px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 text-sm">AI-assisted Development</span></div><a href="#ai-knowledge" class="inline-block text-primary mt-4 text-sm">AI Knowledge ↗</a></div>
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Tech Stack -->
                 <div class="reveal">
@@ -787,12 +805,14 @@
         </div>
     </section>
 
+    <section id="ai-knowledge" class="py-24 relative"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-16 reveal"><div><span class="text-primary text-xs font-mono tracking-widest">LEARN. BUILD. ITERATE.</span><h2 class="text-3xl md:text-4xl font-bold mt-4 mb-6">AI Knowledge<span class="text-primary">.</span></h2></div><p class="text-gray-400 leading-relaxed" data-tr="Merakı pratiğe dönüştürmek. Yapay zekayı yazılım geliştirme sürecinin bir parçası olarak keşfediyorum." data-en="Turning curiosity into practice. Exploring AI as part of the software development process.">Turning curiosity into practice. Exploring AI as part of the software development process.</p></div><div class="grid md:grid-cols-3 gap-6"><article class="glass-card p-8 rounded-2xl reveal"><span class="text-primary font-mono text-sm">01 /</span><h3 class="text-xl text-white font-bold mt-6 mb-4" data-tr="Prompt Engineering" data-en="Prompt Engineering">Prompt Engineering</h3><p class="text-gray-400 leading-relaxed" data-tr="Net talimatlar, bağlam ve örneklerle amaca uygun yanıtlar üretme." data-en="Shaping useful responses with clear instructions, context, and examples.">Shaping useful responses with clear instructions, context, and examples.</p></article><article class="glass-card p-8 rounded-2xl reveal"><span class="text-primary font-mono text-sm">02 /</span><h3 class="text-xl text-white font-bold mt-6 mb-4" data-tr="Modeller & API Entegrasyonu" data-en="Models & API Integration">Models & API Integration</h3><p class="text-gray-400 leading-relaxed" data-tr="Claude ve Anthropic API ile yapay zeka yeteneklerini uygulamalara taşıma." data-en="Bringing AI capabilities into applications with Claude and the Anthropic API.">Bringing AI capabilities into applications with Claude and the Anthropic API.</p></article><article class="glass-card p-8 rounded-2xl reveal"><span class="text-primary font-mono text-sm">03 /</span><h3 class="text-xl text-white font-bold mt-6 mb-4" data-tr="AI Destekli Geliştirme" data-en="AI-assisted Development">AI-assisted Development</h3><p class="text-gray-400 leading-relaxed" data-tr="Claude Code ile kodlama, hata ayıklama ve geliştirme süreçlerini destekleme." data-en="Supporting coding, debugging, and development workflows with Claude Code.">Supporting coding, debugging, and development workflows with Claude Code.</p></article></div><a class="inline-flex items-center gap-4 text-primary mt-8 hover:text-white transition-colors" href="#certs"><span data-tr="AI eğitimlerimi keşfet" data-en="Explore my AI training">Explore my AI training</span> <span aria-hidden="true">↗</span></a></div></section>
+
     <!-- iOS Apps Section -->
     <section id="ios-apps" class="py-24 relative bg-dark-lighter/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-gradient" data-tr="iOS Uygulamalarım" data-en="My iOS Apps">My iOS Apps</span></h2>
-                <p class="text-gray-400 mt-4" data-tr="SwiftUI ve UIKit ile geliştirdiğim App Store uygulamaları" data-en="App Store apps developed with SwiftUI & UIKit">App Store apps developed with SwiftUI & UIKit</p>
+                <p class="text-gray-400 mt-4" data-tr="Geliştirdiğim mobil uygulamalar. En yeni uygulamalarımın tamamını App Store’da keşfet." data-en="Mobile apps I’ve built. Discover all my latest releases on the App Store.">Mobile apps I’ve built. Discover all my latest releases on the App Store.</p>
                 <div class="w-20 h-1 bg-blue-500 mx-auto rounded-full mt-4"></div>
             </div>
 
@@ -829,8 +849,29 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Yol Maliyetin -->
+                <a href="https://apps.apple.com/tr/app/yol-maliyetin/id6804384620" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400 to-amber-700 flex items-center justify-center shrink-0">
+                                <i class="fas fa-gas-pump text-white text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Yol Maliyetin</h3>
+                                <span class="text-xs text-gray-400" data-tr="Seyahat" data-en="Travel">Travel</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded" data-tr="Yeni" data-en="New">New</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4" data-tr="Yola çıkmadan yakıt, köprü ve otoyol masraflarını hesapla; yolculuk bütçeni planla." data-en="Calculate fuel, bridge, and highway costs before you travel and plan your trip budget.">Calculate fuel, bridge, and highway costs before you travel and plan your trip budget.</p>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded" data-tr="App Store'da" data-en="On App Store">On App Store</span>
+                        <span class="text-sm text-primary"><span data-tr="Uygulamayı keşfet" data-en="Explore the app">Explore the app</span> <span aria-hidden="true">↗</span></span>
+                    </div>
+                </a>
+
                 <!-- Aura Tuner -->
-                <a href="https://apps.apple.com/ae/app/id6763359497" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6763359497" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-400 to-rose-600 flex items-center justify-center shadow-lg">
                             <i class="fas fa-music text-white text-2xl"></i>
@@ -851,7 +892,7 @@
                 </a>
 
                 <!-- Equate Pro -->
-                <a href="https://apps.apple.com/ae/app/id6761053555" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6761053555" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-700 flex items-center justify-center shadow-lg">
                             <span class="text-3xl font-bold text-white">∑</span>
@@ -872,7 +913,7 @@
                 </a>
 
                 <!-- Neon Bridges -->
-                <a href="https://apps.apple.com/ae/app/id6761208648" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6761208648" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-700 flex items-center justify-center shadow-lg">
                             <i class="fas fa-link text-white text-2xl"></i>
@@ -893,7 +934,7 @@
                 </a>
 
                 <!-- Glyph Decode -->
-                <a href="https://apps.apple.com/ae/app/id6761102606" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6761102606" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-700 flex items-center justify-center shadow-lg">
                             <span class="text-3xl font-bold text-white">ᚱ</span>
@@ -914,7 +955,7 @@
                 </a>
 
                 <!-- Sky Grid -->
-                <a href="https://apps.apple.com/ae/app/id6761081180" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6761081180" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-400 to-cyan-700 flex items-center justify-center shadow-lg">
                             <i class="fas fa-city text-white text-2xl"></i>
@@ -935,7 +976,7 @@
                 </a>
 
                 <!-- Mind Tower Pro -->
-                <a href="https://apps.apple.com/ae/app/id6759198975" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6759198975" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg">
                             <i class="fas fa-brain text-white text-2xl"></i>
@@ -956,7 +997,7 @@
                 </a>
 
                 <!-- Space Traveler -->
-                <a href="https://apps.apple.com/ae/app/id6759207342" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6759207342" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center shadow-lg">
                             <i class="fas fa-user-astronaut text-white text-2xl"></i>
@@ -977,7 +1018,7 @@
                 </a>
 
                 <!-- Randeups -->
-                <a href="https://apps.apple.com/ae/app/id6756975642" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6756975642" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
                             <i class="fas fa-calendar-check text-white text-2xl"></i>
@@ -998,7 +1039,7 @@
                 </a>
 
                 <!-- Mamba Snake -->
-                <a href="https://apps.apple.com/ae/app/id6757639534" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6757639534" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
                             <span class="text-3xl">🐍</span>
@@ -1019,7 +1060,7 @@
                 </a>
 
                 <!-- Aero Guard -->
-                <a href="https://apps.apple.com/ae/app/id6757016984" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6757016984" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center shadow-lg">
                             <i class="fas fa-wind text-white text-2xl"></i>
@@ -1040,7 +1081,7 @@
                 </a>
 
                 <!-- Rowing Track -->
-                <a href="https://apps.apple.com/ae/app/id6757117124" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6757117124" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center shadow-lg">
                             <i class="fas fa-water text-white text-2xl"></i>
@@ -1061,7 +1102,7 @@
                 </a>
 
                 <!-- Element Tetris -->
-                <a href="https://apps.apple.com/ae/app/id6756936450" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block">
+                <a href="https://apps.apple.com/ae/app/id6756936450" target="_blank" class="glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300 reveal group block" rel="noopener noreferrer">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
                             <span class="text-2xl">🧱</span>
@@ -1084,11 +1125,11 @@
 
             <div class="text-center mt-12 reveal">
                 <div class="inline-flex flex-wrap justify-center items-center gap-4 glass px-6 py-3 rounded-full">
-                    <span class="flex items-center gap-2 text-sm text-gray-400"><i class="fab fa-app-store-ios text-blue-500"></i> <span data-tr="12 Uygulama" data-en="12 Apps">12 Apps</span></span>
+                    <span class="flex items-center gap-2 text-sm text-gray-400"><i class="fab fa-app-store-ios text-blue-500"></i> <span data-tr="13 Uygulama" data-en="13 Apps">13 Apps</span></span>
                     <span class="w-px h-4 bg-gray-700"></span>
                     <span class="flex items-center gap-2 text-sm text-gray-400"><i class="fas fa-check-circle text-green-500"></i> <span data-tr="Tümü App Store'da Yayında" data-en="All Live on App Store">All Live on App Store</span></span>
                     <span class="w-px h-4 bg-gray-700"></span>
-                    <a href="https://apps.apple.com/ae/developer/erdinc-yilmaz/id1863747719" target="_blank" class="flex items-center gap-2 text-sm text-primary hover:text-white transition-colors"><i class="fab fa-apple"></i> <span data-tr="Geliştirici Sayfası" data-en="Developer Page">Developer Page</span></a>
+                    <a href="https://apps.apple.com/tr/iphone/search?term=erdin%C3%A7%20y%C4%B1lmaz" target="_blank" class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-primary text-black font-bold text-sm hover:bg-cyan-300 transition-colors" rel="noopener noreferrer"><i class="fab fa-apple" aria-hidden="true"></i> <span data-tr="Daha fazla uygulama" data-en="More apps">More apps</span><span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </div>
@@ -1132,12 +1173,12 @@
                         </div>
                         <div class="flex flex-col sm:flex-row lg:flex-col gap-3 lg:min-w-[210px]">
                             <a href="https://github.com/erdncyz/mercury-farm" target="_blank"
-                                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-white font-medium">
+                                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-white font-medium" rel="noopener noreferrer">
                                 <i class="fab fa-github mr-2"></i>
                                 <span data-tr="GitHub Repo" data-en="GitHub Repo">GitHub Repo</span>
                             </a>
                             <a href="https://www.youtube.com/watch?v=ZHmtFVSZbqM" target="_blank"
-                                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/15 transition-colors text-white font-medium">
+                                class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-red-500/10 border border-red-500/20 hover:bg-red-500/15 transition-colors text-white font-medium" rel="noopener noreferrer">
                                 <i class="fab fa-youtube mr-2 text-red-400"></i>
                                 <span data-tr="Demo Video" data-en="Demo Video">Demo Video</span>
                             </a>
@@ -1149,7 +1190,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- testgen - 6 stars -->
                 <a href="https://github.com/erdncyz/testgen" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-yellow-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-yellow-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-yellow-500 transition-colors">testgen</h3>
                         <div class="flex items-center gap-2">
@@ -1165,7 +1206,7 @@
 
                 <!-- ChuckerIOS - 5 stars -->
                 <a href="https://github.com/erdncyz/ChuckerIOS" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-orange-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-orange-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-orange-500 transition-colors">ChuckerIOS</h3>
                         <div class="flex items-center gap-2">
@@ -1181,7 +1222,7 @@
 
                 <!-- mercury-app-center - 4 stars -->
                 <a href="https://github.com/erdncyz/mercury-app-center" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-primary reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-primary reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">mercury-app-center</h3>
                         <div class="flex items-center gap-2">
@@ -1197,7 +1238,7 @@
 
                 <!-- mercury-monitoring - 2 stars -->
                 <a href="https://github.com/erdncyz/mercury-monitoring" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-emerald-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-emerald-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-emerald-500 transition-colors">mercury-monitoring</h3>
                         <div class="flex items-center gap-2">
@@ -1213,7 +1254,7 @@
 
                 <!-- appium-tizen-driver - 2 stars -->
                 <a href="https://github.com/erdncyz/appium-tizen-driver" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-secondary reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-secondary reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-secondary transition-colors">appium-tizen-driver</h3>
                         <div class="flex items-center gap-2">
@@ -1230,7 +1271,7 @@
 
                 <!-- AeroGuard -->
                 <a href="https://github.com/erdncyz/AeroGuard" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-blue-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-blue-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-blue-500 transition-colors">AeroGuard</h3>
                         <div class="flex items-center gap-2">
@@ -1247,7 +1288,7 @@
 
                 <!-- rowing-track -->
                 <a href="https://github.com/erdncyz/rowing-track" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-accent reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-accent reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-accent transition-colors">rowing-track</h3>
                         <div class="flex items-center gap-2">
@@ -1263,7 +1304,7 @@
 
                 <!-- FitApex -->
                 <a href="https://github.com/erdncyz/FitApex" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-green-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-green-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-green-500 transition-colors">FitApex</h3>
                         <div class="flex items-center gap-2">
@@ -1279,7 +1320,7 @@
 
                 <!-- element-tetris -->
                 <a href="https://github.com/erdncyz/element-tetris" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-purple-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-purple-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-purple-500 transition-colors">element-tetris</h3>
                         <div class="flex items-center gap-2">
@@ -1295,7 +1336,7 @@
 
                 <!-- appium-device-farm -->
                 <a href="https://github.com/erdncyz/appium-device-farm" target="_blank"
-                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-red-500 reveal">
+                    class="group glass-card p-6 rounded-xl hover:bg-white/5 transition-all duration-300 border-l-4 border-l-red-500 reveal" rel="noopener noreferrer">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-lg font-bold text-white group-hover:text-red-500 transition-colors">appium-device-farm</h3>
                         <div class="flex items-center gap-2">
@@ -1313,7 +1354,7 @@
 
             <div class="text-center mt-12">
                 <a href="https://github.com/erdncyz?tab=repositories" target="_blank"
-                    class="inline-flex items-center px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium">
+                    class="inline-flex items-center px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium" rel="noopener noreferrer">
                     <i class="fab fa-github mr-2"></i> <span data-tr="68+ Repoyu Gör" data-en="View All 68+ Repositories">View All 68+ Repositories</span>
                 </a>
             </div>
@@ -1339,7 +1380,7 @@
 
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- Blog Post 1 - Swift Architecture -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-orange-500/10 text-orange-500 rounded text-xs">SwiftUI</span>
                         <span class="text-gray-500">Jan 2026</span>
@@ -1350,19 +1391,19 @@
                 </a>
 
                 <!-- Blog Post 2 - UIKit vs SwiftUI -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-blue-500/10 text-blue-500 rounded text-xs">UIKit</span>
                         <span class="px-2 py-1 bg-orange-500/10 text-orange-500 rounded text-xs">SwiftUI</span>
                         <span class="text-gray-500">Dec 2025</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">iOS Geliştirme Savaşları: UIKit, Storyboard ve SwiftUI</h3>
-                    <p class="text-gray-400 text-sm mb-4">Hangisini neden seçmelisiniz? iOS uygulama geliştirme dünyasına adım attığınızda kendinizi bir üçgenin ortasında bulursunuz.</p>
+                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">Mobil Geliştirme Savaşları: UIKit, Storyboard ve SwiftUI</h3>
+                    <p class="text-gray-400 text-sm mb-4">Hangisini neden seçmelisiniz? mobil uygulama geliştirme dünyasına adım attığınızda kendinizi bir üçgenin ortasında bulursunuz.</p>
                     <span class="inline-flex items-center text-blue-500 text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
                 </a>
 
                 <!-- Blog Post 3 - NavigationStack -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-purple-500/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-purple-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-purple-500/10 text-purple-500 rounded text-xs">Navigation</span>
                         <span class="text-gray-500">Dec 2025</span>
@@ -1373,7 +1414,7 @@
                 </a>
 
                 <!-- Blog Post 4 - Animations -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-accent/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-accent/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-accent/10 text-accent rounded text-xs">Animation</span>
                         <span class="text-gray-500">Nov 2025</span>
@@ -1384,7 +1425,7 @@
                 </a>
 
                 <!-- Blog Post 5 - View Modifiers -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">Cheat Sheet</span>
                         <span class="text-gray-500">Nov 2025</span>
@@ -1395,7 +1436,7 @@
                 </a>
 
                 <!-- Blog Post 6 - Appium 3.0 -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-green-500/50 transition-all duration-300 reveal group">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-green-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
                         <span class="px-2 py-1 bg-green-500/10 text-green-500 rounded text-xs">Appium</span>
                         <span class="text-gray-500">Oct 2025</span>
@@ -1407,7 +1448,7 @@
             </div>
 
             <div class="text-center mt-12">
-                <a href="https://medium.com/@erdncyz" target="_blank" class="inline-flex items-center px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium">
+                <a href="https://medium.com/@erdncyz" target="_blank" class="inline-flex items-center px-6 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium" rel="noopener noreferrer">
                     <i class="fab fa-medium mr-2"></i> <span data-tr="Tüm Yazıları Oku" data-en="Read All Articles">Read All Articles</span>
                 </a>
             </div>
@@ -1418,7 +1459,7 @@
     <section id="certs" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-gradient" data-tr="Sertifikalar & Eğitimler" data-en="Certifications & Training">Certifications & Training</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-gradient" data-tr="AI Eğitimleri & Sertifikalar" data-en="AI Training & Certifications">AI Training & Certifications</span></h2>
                 <p class="text-gray-400 mt-4" data-tr="Yapay zeka ve modern geliştirme üzerine tamamladığım programlar" data-en="Programs I completed on AI and modern development">Programs I completed on AI and modern development</p>
                 <div class="w-20 h-1 bg-secondary mx-auto rounded-full mt-4"></div>
             </div>
@@ -1519,7 +1560,7 @@
                     <i class="fas fa-certificate text-4xl text-secondary mb-4"></i>
                     <h3 class="text-2xl font-bold text-white mb-1">5+</h3>
                     <p class="text-gray-400 text-sm" data-tr="Tamamlanan Sertifika & Eğitim" data-en="Completed Certifications & Training">Completed Certifications & Training</p>
-                    <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank" class="mt-4 inline-flex items-center text-secondary hover:text-white transition-colors text-sm"><i class="fab fa-linkedin mr-2"></i><span data-tr="LinkedIn'de Gör" data-en="View on LinkedIn">View on LinkedIn</span></a>
+                    <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank" class="mt-4 inline-flex items-center text-secondary hover:text-white transition-colors text-sm" rel="noopener noreferrer"><i class="fab fa-linkedin mr-2"></i><span data-tr="LinkedIn'de Gör" data-en="View on LinkedIn">View on LinkedIn</span></a>
                 </div>
             </div>
         </div>
@@ -1544,23 +1585,23 @@
 
                 <div class="mt-16 flex justify-center gap-8">
                     <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#0077b5] hover:scale-110 transition-all">
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#0077b5] hover:scale-110 transition-all" rel="noopener noreferrer">
                         <i class="fab fa-linkedin-in text-xl"></i>
                     </a>
                     <a href="https://github.com/erdncyz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#333] hover:scale-110 transition-all">
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#333] hover:scale-110 transition-all" rel="noopener noreferrer">
                         <i class="fab fa-github text-xl"></i>
                     </a>
                     <a href="https://www.instagram.com/erdncyz/#" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all">
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all" rel="noopener noreferrer">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
                     <a href="https://medium.com/@erdncyz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#00ab6c] hover:scale-110 transition-all">
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#00ab6c] hover:scale-110 transition-all" rel="noopener noreferrer">
                         <i class="fab fa-medium-m text-xl"></i>
                     </a>
                     <a href="https://x.com/erdnc_ylmaz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all">
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all" rel="noopener noreferrer">
                         <i class="fab fa-x-twitter text-xl"></i>
                     </a>
                 </div>
@@ -1603,7 +1644,7 @@
 
     <script>
         // Typing Effect
-        const texts = ["Software Test Automation Engineer", "iOS Developer", "Open Source Contributor", "SwiftUI & UIKit Expert", "Mobile Application Developer"];
+        const texts = ["Software Test Automation Engineer", "Mobile Developer", "Open Source Contributor", "SwiftUI & UIKit Expert", "Mobile Application Developer", "AI-assisted Development"];
         let count = 0;
         let index = 0;
         let currentText = "";
@@ -1676,7 +1717,18 @@
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+            const isOpen = menu.classList.toggle('hidden') === false;
+            btn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+        }));
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); btn.focus();
+            }
         });
 
         // Language Switcher (Simple Implementation)
@@ -1687,6 +1739,10 @@
         langEnBtn.addEventListener('click', () => setLanguage('en'));
 
         function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('portfolioLanguage', lang); } catch {}
+            langTrBtn.setAttribute('aria-pressed', String(lang === 'tr'));
+            langEnBtn.setAttribute('aria-pressed', String(lang === 'en'));
             const elements = document.querySelectorAll('[data-' + lang + ']');
             elements.forEach(el => {
                 if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -1719,6 +1775,10 @@
                 langTrBtn.classList.add('bg-transparent', 'text-gray-400');
             }
         }
+
+        let savedLanguage = 'en';
+        try { savedLanguage = localStorage.getItem('portfolioLanguage') || 'en'; } catch {}
+        setLanguage(savedLanguage === 'tr' ? 'tr' : 'en');
 
         // Cookie Logic
         setTimeout(() => {

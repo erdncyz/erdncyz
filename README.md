@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">Hi there, I'm Erdinç Yılmaz! 👋</h1>
-  <h3 align="center">Software Test Automation Engineer | iOS & Mobile Application Developer</h3>
+  <h3 align="center">Software Test Automation Engineer | Mobile Developer</h3>
   
   <p align="center"> 
     <img src="https://komarev.com/ghpvc/?username=erdncyz&style=flat-square&color=blue" alt="erdncyz" /> 
@@ -23,10 +23,10 @@
 
 ### 🚀 About Me
 
-I am a passionate **Software Test Automation Engineer** and **iOS Developer** based in Turkey. I specialize in building robust test automation frameworks and developing native mobile applications. I am also an active **Open Source Contributor**, particularly for the Appium ecosystem.
+I am a passionate **Software Test Automation Engineer** and **Mobile Developer** based in Turkey. I specialize in building robust test automation frameworks and developing native mobile applications. I am also an active **Open Source Contributor**, particularly for the Appium ecosystem.
 
-- � I’m currently working on **iOS Development & Test Automation**
-- 🌱 I’m currently learning **Advanced Swift & SwiftUI Patterns**
+- � I’m currently working on **Mobile Development, Test Automation & AI**
+- 🌱 I’m currently learning **AI Fluency, Prompt Engineering & Claude Code**
 - 👯 I’m looking to collaborate on **Open Source Mobile Test Tools**
 - 💬 Ask me about **Appium, Selenium, iOS, and Test Automation**
 
@@ -43,6 +43,10 @@ I am a passionate **Software Test Automation Engineer** and **iOS Developer** ba
 <img src="https://img.shields.io/badge/Kotlin-0095D5?style=for-the-badge&logo=kotlin&logoColor=white" />
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
 <img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" />
+
+**AI Knowledge & Tools**
+<br>
+Prompt Engineering · AI Fluency · Claude · Anthropic API · Claude Code · AI-assisted Development
 
 **Test Automation**
 <br>
@@ -61,6 +65,20 @@ I am a passionate **Software Test Automation Engineer** and **iOS Developer** ba
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
 
 </div>
+
+---
+
+### 🧠 AI Training
+
+- Prompt Engineering and AI Applications — Mindset Institute (12 hours)
+- AI Fluency: Framework & Foundations — Anthropic
+- Claude with the Anthropic API — Anthropic
+- Claude 101 — Anthropic
+- Claude Code in Action — Anthropic
+
+### 💼 Experience
+
+**Digiturk — 4 years 11 months**
 
 ---
 
