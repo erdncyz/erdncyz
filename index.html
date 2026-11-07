@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -20,15 +20,6 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EPXJ05TPDM"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-EPXJ05TPDM');
-    </script>
 
     <script>
         tailwind.config = {
@@ -162,16 +153,50 @@
         }
 
         /* Utilities */
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: 0.75rem;
+            z-index: 80;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background: #00f5ff;
+            color: #000;
+            font-weight: 700;
+            transform: translateY(-200%);
+        }
+        .skip-link:focus,
+        .skip-link:focus-visible {
+            transform: none;
+        }
         .reveal {
+            opacity: 1;
+            transform: none;
+        }
+        html.motion-ok .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-
-        .reveal.active {
+        html.motion-ok .reveal.active,
+        html.motion-ok :target .reveal {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
+            transition: none;
         }
+        .cookie-banner {
+            position: relative;
+            z-index: 40;
+            max-width: min(80rem, calc(100% - 2rem));
+            margin: 5.25rem auto 0;
+            padding: 1rem 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            background: rgba(15, 17, 26, 0.95);
+            backdrop-filter: blur(16px);
+        }
+        .cookie-banner[hidden] { display: none; }
+        #cookieBanner:not([hidden]) + main #about { padding-top: 1.5rem; }
         html { scroll-padding-top: 100px; }
         a:focus-visible, button:focus-visible { outline: 2px solid #00f5ff; outline-offset: 4px; }
         #mobile-menu { max-height: calc(100dvh - 80px); overflow-y: auto; }
@@ -179,18 +204,24 @@
             #navbar .flex-shrink-0 > a { font-size: 17px; }
             #navbar .gap-4 { gap: 8px; }
             #navbar button[id^="lang-"] { padding-left: 8px; padding-right: 8px; }
-            #about h2 { height: auto; min-height: 88px; }
+            #about h2 { height: auto; min-height: 72px; }
+            #about .mb-6 { margin-bottom: 0.75rem; }
+            #about .mb-8 { margin-bottom: 0.75rem; }
+            #about .mb-10 { margin-bottom: 1rem; }
+            #cookieBanner:not([hidden]) + main #about { padding-top: 0.25rem; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto !important; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
-            .reveal { opacity: 1; transform: none; }
+            .reveal,
+            html.motion-ok .reveal { opacity: 1 !important; transform: none !important; }
             .cursor-dot, .cursor-outline { display: none; }
         }
     </style>
 </head>
 
 <body class="bg-dark text-gray-300 font-sans antialiased selection:bg-primary selection:text-black overflow-x-hidden">
+    <a class="skip-link" href="#main"><span data-tr="İçeriğe geç" data-en="Skip to content">Skip to content</span></a>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot hidden xl:block"></div>
@@ -248,16 +279,16 @@
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
-                        <button id="lang-tr"
+                        <button type="button" id="lang-tr" aria-pressed="false"
                             class="px-3 py-1 rounded-full text-xs font-bold transition-all hover:bg-white/10 text-gray-400">TR</button>
-                        <button id="lang-en"
+                        <button type="button" id="lang-en" aria-pressed="true"
                             class="px-3 py-1 rounded-full text-xs font-bold bg-primary text-black shadow-[0_0_10px_rgba(0,245,255,0.5)]">EN</button>
                     </div>
                     <div class="-mr-2 flex xl:hidden">
                         <button type="button"
                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none"
                             aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
-                            <span class="sr-only">Open main menu</span>
+                            <span class="sr-only" id="mobile-menu-label" data-tr="Menüyü aç" data-en="Open main menu">Open main menu</span>
                             <i class="fas fa-bars text-xl"></i>
                         </button>
                     </div>
@@ -292,6 +323,27 @@
         </div>
     </nav>
 
+    <div id="cookieBanner" hidden class="cookie-banner" role="region" aria-labelledby="cookie-message">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p id="cookie-message" class="text-gray-300 text-sm m-0">
+                <i class="fas fa-cookie-bite text-primary mr-2" aria-hidden="true"></i>
+                <span data-tr="Ölçüm çerezleri yalnızca kabul ederseniz yüklenir."
+                    data-en="Analytics cookies load only if you accept.">Analytics cookies load only if you accept.</span>
+            </p>
+            <div class="flex gap-3 shrink-0">
+                <button type="button" id="cookie-accept"
+                    class="px-4 py-2 rounded-lg bg-primary text-black font-bold text-sm hover:bg-cyan-300 transition-colors">
+                    <span data-tr="Kabul Et" data-en="Accept">Accept</span>
+                </button>
+                <button type="button" id="cookie-reject"
+                    class="px-4 py-2 rounded-lg bg-white/5 text-white text-sm hover:bg-white/10 transition-colors border border-white/10">
+                    <span data-tr="Reddet" data-en="Decline">Decline</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main id="main">
     <!-- Hero Section -->
     <section id="about" class="min-h-screen flex items-center justify-center pt-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
@@ -332,20 +384,20 @@
 
                 <div class="mt-12 flex items-center justify-center md:justify-start gap-6 text-2xl text-gray-400">
                     <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank"
-                        class="hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
-                            class="fab fa-linkedin"></i></a>
+                        class="relative hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
+                            class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only" data-tr="LinkedIn profili" data-en="LinkedIn profile">LinkedIn profile</span></a>
                     <a href="https://github.com/erdncyz" target="_blank"
-                        class="hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
-                            class="fab fa-github"></i></a>
+                        class="relative hover:text-primary transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
+                            class="fab fa-github" aria-hidden="true"></i><span class="sr-only" data-tr="GitHub profili" data-en="GitHub profile">GitHub profile</span></a>
                     <a href="https://www.instagram.com/erdncyz/#" target="_blank"
-                        class="hover:text-accent transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
-                            class="fab fa-instagram"></i></a>
+                        class="relative hover:text-accent transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
+                            class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only" data-tr="Instagram profili" data-en="Instagram profile">Instagram profile</span></a>
                     <a href="https://medium.com/@erdncyz" target="_blank"
-                        class="hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
-                            class="fab fa-medium"></i></a>
+                        class="relative hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
+                            class="fab fa-medium" aria-hidden="true"></i><span class="sr-only" data-tr="Medium profili" data-en="Medium profile">Medium profile</span></a>
                     <a href="https://x.com/erdnc_ylmaz" target="_blank"
-                        class="hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
-                            class="fab fa-x-twitter"></i></a>
+                        class="relative hover:text-white transition-colors transform hover:scale-110" rel="noopener noreferrer"><i
+                            class="fab fa-x-twitter" aria-hidden="true"></i><span class="sr-only" data-tr="X profili" data-en="X profile">X profile</span></a>
                 </div>
             </div>
 
@@ -1366,84 +1418,74 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="text-gradient" data-tr="Blog Yazıları" data-en="Blog Posts">Blog Posts</span></h2>
-                <p class="text-gray-400 mt-4" data-tr="SwiftUI, UIKit, iOS geliştirme ve test otomasyonu üzerine yazılarım" data-en="My articles on SwiftUI, UIKit, iOS development and test automation">My articles on SwiftUI, UIKit, iOS development and test automation</p>
+                <p class="text-gray-400 mt-4" data-tr="Yapay zeka destekli geliştirme ve kodlama ajanları üzerine son yazılar." data-en="Recent articles on AI-assisted development and coding agents.">Recent articles on AI-assisted development and coding agents.</p>
                 <div class="w-20 h-1 bg-primary mx-auto rounded-full mt-4"></div>
             </div>
 
-            <!-- Blog Categories -->
             <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
-                <span class="px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-500 text-sm font-medium"><i class="fab fa-swift mr-2"></i>SwiftUI</span>
-                <span class="px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-500 text-sm font-medium"><i class="fab fa-apple mr-2"></i>UIKit</span>
-                <span class="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-500 text-sm font-medium"><i class="fas fa-layer-group mr-2"></i>Architecture</span>
-                <span class="px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-500 text-sm font-medium"><i class="fas fa-robot mr-2"></i>Appium</span>
+                <span class="px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium" data-tr="AI yazarlığı" data-en="AI writing">AI writing</span>
+                <span class="px-4 py-2 rounded-full bg-secondary/10 border border-secondary/30 text-secondary text-sm font-medium" data-tr="Kodlama ajanları" data-en="Coding agents">Coding agents</span>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <!-- Blog Post 1 - Swift Architecture -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/cloudflare-security-audit-skill-kodlama-ajan%C4%B1n%C4%B1-kan%C4%B1t-isteyen-bir-g%C3%BCvenlik-denet%C3%A7isine-%C3%A7evirmek-fa242e9f96e2" target="_blank" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-orange-500/10 text-orange-500 rounded text-xs">SwiftUI</span>
-                        <span class="text-gray-500">Jan 2026</span>
+                        <span class="px-2 py-1 bg-orange-500/10 text-orange-500 rounded text-xs" data-tr="Yapay zeka" data-en="AI">AI</span>
+                        <span class="text-gray-500" data-tr="7 Kas 2026" data-en="7 Nov 2026">7 Nov 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">Swift Mimarisi Nedir? Hangisi Tercih Edilmeli?</h3>
-                    <p class="text-gray-400 text-sm mb-4">MVC, MVVM, VIPER ve TCA - iOS dünyasında bir uygulama geliştirirken kodunuzu nasıl organize etmelisiniz?</p>
-                    <span class="inline-flex items-center text-orange-500 text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-orange-500 transition-colors">Cloudflare security-audit skill: Kodlama ajanını kanıt isteyen bir güvenlik denetçisine çevirmek</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">“Bulan doğrulamaz” ilkesine dayanan altı fazlı, açık kaynak bir denetim iş akışının ayrıntılı incelemesi</p>
+                    <span class="inline-flex items-center text-orange-500 text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
 
-                <!-- Blog Post 2 - UIKit vs SwiftUI -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/colibri-ile-kendi-makinenizde-y%C3%BCz-milyarlarca-parametrelik-moe-%C3%A7al%C4%B1%C5%9Ft%C4%B1rmak-d9b5a7f6f25c" target="_blank" class="glass-card p-6 rounded-2xl hover:border-blue-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-blue-500/10 text-blue-500 rounded text-xs">UIKit</span>
-                        <span class="px-2 py-1 bg-orange-500/10 text-orange-500 rounded text-xs">SwiftUI</span>
-                        <span class="text-gray-500">Dec 2025</span>
+                        <span class="px-2 py-1 bg-blue-500/10 text-blue-500 rounded text-xs">MoE</span>
+                        <span class="text-gray-500" data-tr="5 Kas 2026" data-en="5 Nov 2026">5 Nov 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">Mobil Geliştirme Savaşları: UIKit, Storyboard ve SwiftUI</h3>
-                    <p class="text-gray-400 text-sm mb-4">Hangisini neden seçmelisiniz? mobil uygulama geliştirme dünyasına adım attığınızda kendinizi bir üçgenin ortasında bulursunuz.</p>
-                    <span class="inline-flex items-center text-blue-500 text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-blue-500 transition-colors">Colibri ile kendi makinenizde yüz milyarlarca parametrelik MoE çalıştırmak</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">NVMe’den expert akıtan C motoru: haberler, ne işe yarıyor, adım adım kurulum</p>
+                    <span class="inline-flex items-center text-blue-500 text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
 
-                <!-- Blog Post 3 - NavigationStack -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-purple-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/s%C4%B1f%C4%B1rdan-de%C4%9Fil-mevcut-kod-taban%C4%B1nda-ajanla-performans-iyile%C5%9Ftirmesi-yapt%C4%B1rmak-347411942447" target="_blank" class="glass-card p-6 rounded-2xl hover:border-purple-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-purple-500/10 text-purple-500 rounded text-xs">Navigation</span>
-                        <span class="text-gray-500">Dec 2025</span>
+                        <span class="px-2 py-1 bg-purple-500/10 text-purple-500 rounded text-xs" data-tr="Kodlama ajanları" data-en="Coding agents">Coding agents</span>
+                        <span class="text-gray-500" data-tr="26 Eki 2026" data-en="26 Oct 2026">26 Oct 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-purple-500 transition-colors">SwiftUI'da Navigasyonun Evrimi: NavigationView'dan NavigationStack'e</h3>
-                    <p class="text-gray-400 text-sm mb-4">iOS 16 ile gelen yenilikler ve UIKit'e alışmış geliştiriciler için pratik geçiş rehberi.</p>
-                    <span class="inline-flex items-center text-purple-500 text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-purple-500 transition-colors">Sıfırdan değil, mevcut kod tabanında: Ajanla performans iyileştirmesi yaptırmak</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">Kodlama ajanına “bunu hızlandır” demek yetmiyor.</p>
+                    <span class="inline-flex items-center text-purple-500 text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
 
-                <!-- Blog Post 4 - Animations -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-accent/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/vibe-coding-ile-s%C4%B1f%C4%B1rdan-proje-senior-geli%C5%9Ftirici-gibi-kurgulanm%C4%B1%C5%9F-bir-repo-i%CC%87%C3%A7in-ad%C4%B1m-ad%C4%B1m-rehber-67f590089adf" target="_blank" class="glass-card p-6 rounded-2xl hover:border-accent/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-accent/10 text-accent rounded text-xs">Animation</span>
-                        <span class="text-gray-500">Nov 2025</span>
+                        <span class="px-2 py-1 bg-accent/10 text-accent rounded text-xs" data-tr="Yazılım geliştirme" data-en="Software development">Software development</span>
+                        <span class="text-gray-500" data-tr="25 Eki 2026" data-en="25 Oct 2026">25 Oct 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">SwiftUI'da Hayat Veren Dokunuşlar: Animasyon ve Geçişler</h3>
-                    <p class="text-gray-400 text-sm mb-4">Uygulamalarınıza "Apple hissi" veren akıcı animasyonları nasıl ekleyeceğinizi öğrenin.</p>
-                    <span class="inline-flex items-center text-accent text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">Vibe Coding ile Sıfırdan Proje: Senior Geliştirici Gibi Kurgulanmış Bir Repo İçin Adım Adım Rehber</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">Son birkaç aydır bana en çok gelen soru şu: “Sıfırdan bir proje yaptırmak istiyorum, nereden başlayayım?”</p>
+                    <span class="inline-flex items-center text-accent text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
 
-                <!-- Blog Post 5 - View Modifiers -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/paketi-import-etmeden-bile-%C3%A7al%C4%B1%C5%9Fan-zararl%C4%B1-litellm-olay%C4%B1-ve-geli%C5%9Ftirici-makinesindeki-ai-e6d225b782de" target="_blank" class="glass-card p-6 rounded-2xl hover:border-primary/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">Cheat Sheet</span>
-                        <span class="text-gray-500">Nov 2025</span>
+                        <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs" data-tr="Siber güvenlik" data-en="Security">Security</span>
+                        <span class="text-gray-500" data-tr="24 Eki 2026" data-en="24 Oct 2026">24 Oct 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors">SwiftUI View Modifier Ansiklopedisi: Nihai Cheat Sheet</h3>
-                    <p class="text-gray-400 text-sm mb-4">SwiftUI öğrenirken veya proje geliştirirken elinizin altında bulunması gereken kategorize edilmiş devasa modifier rehberi.</p>
-                    <span class="inline-flex items-center text-primary text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors">Paketi import etmeden bile çalışan zararlı: LiteLLM olayı ve geliştirici makinesindeki AI…</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">LiteLLM 1.107.0 sadece onu kullanan servisleri değil, aynı ortamda Python başlatan her süreci etkiledi.</p>
+                    <span class="inline-flex items-center text-primary text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
 
-                <!-- Blog Post 6 - Appium 3.0 -->
-                <a href="https://medium.com/@erdncyz" target="_blank" class="glass-card p-6 rounded-2xl hover:border-green-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
+                <a href="https://medium.com/@erdncyz/agent-skills-art%C4%B1k-a%C3%A7%C4%B1k-standart-ekibin-bilgisini-skill-olarak-paketlemek-025097791952" target="_blank" class="glass-card p-6 rounded-2xl hover:border-green-500/50 transition-all duration-300 reveal group" rel="noopener noreferrer">
                     <div class="flex items-center gap-3 text-sm mb-3">
-                        <span class="px-2 py-1 bg-green-500/10 text-green-500 rounded text-xs">Appium</span>
-                        <span class="text-gray-500">Oct 2025</span>
+                        <span class="px-2 py-1 bg-green-500/10 text-green-500 rounded text-xs" data-tr="Otomasyon" data-en="Automation">Automation</span>
+                        <span class="text-gray-500" data-tr="24 Eki 2026" data-en="24 Oct 2026">24 Oct 2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 group-hover:text-green-500 transition-colors">Appium 3.0 Kurulumu — Baştan Sona Rehber</h3>
-                    <p class="text-gray-400 text-sm mb-4">Node & npm gereksinimleri, sürücü/eklenti yönetimi, Android (UiAutomator2) ve iOS (XCUITest) ayarları.</p>
-                    <span class="inline-flex items-center text-green-500 text-sm group-hover:text-white transition-colors">Devamını oku <i class="fas fa-arrow-right ml-2"></i></span>
+                    <h3 lang="tr" class="text-lg font-bold text-white mb-3 group-hover:text-green-500 transition-colors">Agent Skills artık açık standart: ekibin bilgisini skill olarak paketlemek</h3>
+                    <p lang="tr" class="text-gray-400 text-sm mb-4">Anthropic, Agent Skills’i Linux Foundation çatısındaki Agentic AI Foundation’a devretti.</p>
+                    <span class="inline-flex items-center text-green-500 text-sm group-hover:text-white transition-colors" data-tr="Yazıyı oku" data-en="Read article">Read article <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></span>
                 </a>
             </div>
 
@@ -1585,29 +1627,35 @@
 
                 <div class="mt-16 flex justify-center gap-8">
                     <a href="https://www.linkedin.com/in/erdinç-yılmaz-b07582152/" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#0077b5] hover:scale-110 transition-all" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin-in text-xl"></i>
+                        class="relative w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#0077b5] hover:scale-110 transition-all" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in text-xl" aria-hidden="true"></i>
+                        <span class="sr-only" data-tr="LinkedIn profili" data-en="LinkedIn profile">LinkedIn profile</span>
                     </a>
                     <a href="https://github.com/erdncyz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#333] hover:scale-110 transition-all" rel="noopener noreferrer">
-                        <i class="fab fa-github text-xl"></i>
+                        class="relative w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#333] hover:scale-110 transition-all" rel="noopener noreferrer">
+                        <i class="fab fa-github text-xl" aria-hidden="true"></i>
+                        <span class="sr-only" data-tr="GitHub profili" data-en="GitHub profile">GitHub profile</span>
                     </a>
                     <a href="https://www.instagram.com/erdncyz/#" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all" rel="noopener noreferrer">
-                        <i class="fab fa-instagram text-xl"></i>
+                        class="relative w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#E1306C] hover:scale-110 transition-all" rel="noopener noreferrer">
+                        <i class="fab fa-instagram text-xl" aria-hidden="true"></i>
+                        <span class="sr-only" data-tr="Instagram profili" data-en="Instagram profile">Instagram profile</span>
                     </a>
                     <a href="https://medium.com/@erdncyz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#00ab6c] hover:scale-110 transition-all" rel="noopener noreferrer">
-                        <i class="fab fa-medium-m text-xl"></i>
+                        class="relative w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-[#00ab6c] hover:scale-110 transition-all" rel="noopener noreferrer">
+                        <i class="fab fa-medium-m text-xl" aria-hidden="true"></i>
+                        <span class="sr-only" data-tr="Medium profili" data-en="Medium profile">Medium profile</span>
                     </a>
                     <a href="https://x.com/erdnc_ylmaz" target="_blank"
-                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all" rel="noopener noreferrer">
-                        <i class="fab fa-x-twitter text-xl"></i>
+                        class="relative w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-black hover:scale-110 transition-all" rel="noopener noreferrer">
+                        <i class="fab fa-x-twitter text-xl" aria-hidden="true"></i>
+                        <span class="sr-only" data-tr="X profili" data-en="X profile">X profile</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="py-8 text-center text-gray-500 text-sm border-t border-white/5">
@@ -1619,89 +1667,91 @@
         </div>
     </footer>
 
-    <!-- Cookie Banner -->
-    <div id="cookieBanner"
-        class="fixed bottom-0 left-0 right-0 bg-dark-lighter/95 backdrop-blur-lg border-t border-white/10 p-6 transform translate-y-full transition-transform duration-500 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-gray-300 text-sm">
-                <i class="fas fa-cookie-bite text-primary mr-2"></i>
-                <span data-tr="Bu site deneyiminizi geliştirmek için çerezler kullanır."
-                    data-en="This site uses cookies to improve your experience.">This site uses cookies to improve your
-                    experience.</span>
-            </div>
-            <div class="flex gap-3">
-                <button onclick="acceptCookies()"
-                    class="px-4 py-2 rounded-lg bg-primary text-black font-bold text-sm hover:bg-cyan-300 transition-colors">
-                    <span data-tr="Kabul Et" data-en="Accept">Accept</span>
-                </button>
-                <button onclick="declineCookies()"
-                    class="px-4 py-2 rounded-lg bg-white/5 text-white text-sm hover:bg-white/10 transition-colors">
-                    <span data-tr="Reddet" data-en="Decline">Decline</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Typing Effect
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const motionOk = !motionQuery.matches;
+        if (motionOk) document.documentElement.classList.add('motion-ok');
+
         const texts = ["Software Test Automation Engineer", "Mobile Developer", "Open Source Contributor", "SwiftUI & UIKit Expert", "Mobile Application Developer", "AI-assisted Development"];
-        let count = 0;
-        let index = 0;
-        let currentText = "";
-        let letter = "";
-
-        (function type() {
-            if (count === texts.length) {
-                count = 0;
-            }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
-
-            document.getElementById("typing-text").textContent = letter;
-
-            if (letter.length === currentText.length) {
-                setTimeout(() => {
-                    count++;
-                    index = 0;
-                    type();
-                }, 2000);
-            } else {
-                setTimeout(type, 100);
-            }
-        })();
-
-        // Custom Cursor
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Smooth follow for outline
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
-        // Scroll Reveal
-        window.addEventListener('scroll', reveal);
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
+        const typingEl = document.getElementById('typing-text');
+        if (!motionOk) {
+            typingEl.textContent = texts[0];
+        } else {
+            let count = 0;
+            let index = 0;
+            (function type() {
+                if (count === texts.length) count = 0;
+                const currentText = texts[count];
+                const letter = currentText.slice(0, ++index);
+                typingEl.textContent = letter;
+                if (letter.length === currentText.length) {
+                    setTimeout(() => { count++; index = 0; type(); }, 2000);
+                } else {
+                    setTimeout(type, 100);
                 }
+            })();
+        }
+
+        if (motionOk) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            if (cursorDot && cursorOutline) {
+                window.addEventListener('mousemove', (e) => {
+                    cursorDot.style.left = `${e.clientX}px`;
+                    cursorDot.style.top = `${e.clientY}px`;
+                    cursorOutline.animate({
+                        left: `${e.clientX}px`,
+                        top: `${e.clientY}px`
+                    }, { duration: 500, fill: 'forwards' });
+                });
             }
         }
-        reveal(); // Trigger once on load
+
+        function activateReveals(root) {
+            if (!root) return;
+            if (root.classList.contains('reveal')) root.classList.add('active');
+            root.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        }
+        function revealHashTarget() {
+            if (!location.hash || location.hash === '#') return;
+            let target = null;
+            try { target = document.querySelector(location.hash); } catch (error) { target = null; }
+            activateReveals(target);
+        }
+        function revealInView() {
+            const limit = window.innerHeight * 0.95;
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < limit && rect.bottom > 0) el.classList.add('active');
+            });
+        }
+        revealHashTarget();
+        revealInView();
+        window.addEventListener('hashchange', revealHashTarget);
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', event => {
+                const id = link.getAttribute('href').slice(1);
+                if (!id) return;
+                const target = document.getElementById(id);
+                if (!target) return;
+                event.preventDefault();
+                activateReveals(target);
+                target.scrollIntoView({ behavior: 'auto', block: 'start' });
+                if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+            });
+        });
+        if (motionOk && 'IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -5% 0px', threshold: 0.01 });
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        } else {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        }
 
         // Navbar Scroll Effect
         window.addEventListener('scroll', () => {
@@ -1713,21 +1763,32 @@
             }
         });
 
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
+        const menuBtn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
-        btn.addEventListener('click', () => {
+        const menuLabel = document.getElementById('mobile-menu-label');
+        function syncMenuLabel() {
+            const lang = document.documentElement.lang === 'tr' ? 'tr' : 'en';
+            const open = menuBtn.getAttribute('aria-expanded') === 'true';
+            menuLabel.textContent = open
+                ? (lang === 'tr' ? 'Menüyü kapat' : 'Close main menu')
+                : (lang === 'tr' ? 'Menüyü aç' : 'Open main menu');
+        }
+        menuBtn.addEventListener('click', () => {
             const isOpen = menu.classList.toggle('hidden') === false;
-            btn.setAttribute('aria-expanded', String(isOpen));
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
+            syncMenuLabel();
         });
-
         menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
             menu.classList.add('hidden');
-            btn.setAttribute('aria-expanded', 'false');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            syncMenuLabel();
         }));
         document.addEventListener('keydown', event => {
             if (event.key === 'Escape' && !menu.classList.contains('hidden')) {
-                menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); btn.focus();
+                menu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                syncMenuLabel();
+                menuBtn.focus();
             }
         });
 
@@ -1743,22 +1804,15 @@
             try { localStorage.setItem('portfolioLanguage', lang); } catch {}
             langTrBtn.setAttribute('aria-pressed', String(lang === 'tr'));
             langEnBtn.setAttribute('aria-pressed', String(lang === 'en'));
-            const elements = document.querySelectorAll('[data-' + lang + ']');
-            elements.forEach(el => {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                if (el.id === 'mobile-menu-label') return;
                 if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                     el.placeholder = el.getAttribute('data-' + lang);
+                } else if (el.children.length === 0) {
+                    el.textContent = el.getAttribute('data-' + lang);
                 } else {
-                    // Check if it has child nodes that are not text (like icons)
-                    // For simplicity in this static version, we just replace text content if it's simple
-                    // A more robust solution would be needed for complex HTML structures
-                    if (el.children.length === 0) {
-                        el.textContent = el.getAttribute('data-' + lang);
-                    } else {
-                        // Handle elements with icons, e.g. buttons
-                        // This is a basic fallback
-                        const textNode = Array.from(el.childNodes).find(node => node.nodeType === 3);
-                        if (textNode) textNode.textContent = el.getAttribute('data-' + lang);
-                    }
+                    const textNode = Array.from(el.childNodes).find(node => node.nodeType === 3 && node.textContent.trim());
+                    if (textNode) textNode.textContent = el.getAttribute('data-' + lang) + ' ';
                 }
             });
 
@@ -1774,27 +1828,53 @@
                 langTrBtn.classList.remove('bg-primary', 'text-black', 'shadow-[0_0_10px_rgba(0,245,255,0.5)]');
                 langTrBtn.classList.add('bg-transparent', 'text-gray-400');
             }
+            syncMenuLabel();
         }
 
         let savedLanguage = 'en';
-        try { savedLanguage = localStorage.getItem('portfolioLanguage') || 'en'; } catch {}
+        try { savedLanguage = localStorage.getItem('portfolioLanguage') || 'en'; } catch (error) { savedLanguage = 'en'; }
         setLanguage(savedLanguage === 'tr' ? 'tr' : 'en');
 
-        // Cookie Logic
-        setTimeout(() => {
-            if (!localStorage.getItem('cookieConsent')) {
-                document.getElementById('cookieBanner').classList.remove('translate-y-full');
-            }
-        }, 2000);
-
-        function acceptCookies() {
-            localStorage.setItem('cookieConsent', 'true');
-            document.getElementById('cookieBanner').classList.add('translate-y-full');
+        const GA_ID = 'G-EPXJ05TPDM';
+        let analyticsLoaded = false;
+        function loadAnalytics() {
+            if (analyticsLoaded) return;
+            analyticsLoaded = true;
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { window.dataLayer.push(arguments); };
+            window.gtag('js', new Date());
+            window.gtag('config', GA_ID);
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(script);
         }
-
+        function hideCookieBanner() {
+            document.getElementById('cookieBanner').hidden = true;
+        }
+        function showCookieBanner() {
+            document.getElementById('cookieBanner').hidden = false;
+        }
+        function acceptCookies() {
+            try { localStorage.setItem('cookieConsent', 'true'); } catch (error) {}
+            hideCookieBanner();
+            loadAnalytics();
+        }
         function declineCookies() {
-            localStorage.setItem('cookieConsent', 'false');
-            document.getElementById('cookieBanner').classList.add('translate-y-full');
+            try { localStorage.setItem('cookieConsent', 'false'); } catch (error) {}
+            hideCookieBanner();
+        }
+        document.getElementById('cookie-accept').addEventListener('click', acceptCookies);
+        document.getElementById('cookie-reject').addEventListener('click', declineCookies);
+        let consent = null;
+        try { consent = localStorage.getItem('cookieConsent'); } catch (error) { consent = null; }
+        if (consent === 'true') {
+            hideCookieBanner();
+            loadAnalytics();
+        } else if (consent === 'false') {
+            hideCookieBanner();
+        } else {
+            showCookieBanner();
         }
     </script>
 </body>
