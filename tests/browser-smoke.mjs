@@ -176,8 +176,9 @@ function layoutScript() {
       blogTop: blogHeading ? Math.round(blogHeading.getBoundingClientRect().top) : null,
       blogText: blogHeading ? blogHeading.textContent.slice(0, 48) : null,
       lang: document.documentElement.lang,
-      hero: document.querySelector('#about p')?.innerText.slice(0, 42),
+      hero: document.querySelector('#about p')?.innerText.slice(0, 180),
       blogIntro: document.querySelector('#blog p')?.innerText.slice(0, 70),
+      tenure: document.getElementById('digiturk-tenure')?.textContent.trim(),
       typing: document.getElementById('typing-text')?.textContent,
       motion: document.documentElement.classList.contains('motion-ok'),
       menuExpanded: document.getElementById('mobile-menu-btn')?.getAttribute('aria-expanded'),
@@ -221,13 +222,16 @@ if (blog.blogOpacity !== '1' || blog.blogParentOpacity !== '1' || blog.blogTop <
 await evaluate(fresh.sessionId, `document.getElementById('lang-tr').click()`);
 const turkish = await evaluate(fresh.sessionId, layoutScript());
 await shot(fresh.sessionId, 'after-mobile-tr');
-record('tr', { lang: turkish.lang, hero: turkish.hero, blogIntro: turkish.blogIntro, menu: turkish.menuLabel });
-if (turkish.lang !== 'tr' || !turkish.hero.includes('Yüksek trafikli') || !turkish.blogIntro.includes('Yapay zeka destekli')) {
+record('tr', { lang: turkish.lang, hero: turkish.hero, blogIntro: turkish.blogIntro, menu: turkish.menuLabel, tenure: turkish.tenure });
+if (turkish.lang !== 'tr' || !turkish.hero.includes('yüksek trafikli') || !turkish.blogIntro.includes('Yapay zeka destekli') || !turkish.tenure.includes('Mart 2022’den beri')) {
   throw new Error('Turkish toggle failed');
 }
+await evaluate(fresh.sessionId, `document.getElementById('digiturk-tenure').scrollIntoView({behavior:'auto', block:'center'})`);
+await shot(fresh.sessionId, 'experience-tr-390');
 await evaluate(fresh.sessionId, `document.getElementById('lang-en').click()`);
 const english = await evaluate(fresh.sessionId, layoutScript());
-if (english.lang !== 'en' || !english.blogIntro.includes('AI-assisted')) throw new Error('English toggle failed');
+if (english.lang !== 'en' || !english.blogIntro.includes('AI-assisted') || english.tenure !== 'Full-time · Since March 2022') throw new Error('English toggle failed');
+await shot(fresh.sessionId, 'experience-en-390');
 
 await evaluate(fresh.sessionId, `document.getElementById('cookie-reject').click()`);
 await new Promise(resolve => setTimeout(resolve, 300));
@@ -245,8 +249,10 @@ await send('Page.navigate', { url: pageUrl }, persistedReject.sessionId);
 await new Promise(resolve => setTimeout(resolve, 2000));
 const persisted = await evaluate(persistedReject.sessionId, layoutScript());
 await shot(persistedReject.sessionId, 'after-desktop-1440-rejected');
-record('persisted-reject-1440', { bannerHidden: persisted.bannerHidden, overflow: persisted.overflow, analytics: persistedReject.analytics.filter(isAnalytics) });
-if (!persisted.bannerHidden || persisted.overflow || persistedReject.analytics.some(isAnalytics)) throw new Error('persisted reject failed');
+record('persisted-reject-1440', { bannerHidden: persisted.bannerHidden, overflow: persisted.overflow, tenure: persisted.tenure, analytics: persistedReject.analytics.filter(isAnalytics) });
+if (!persisted.bannerHidden || persisted.overflow || persisted.tenure !== 'Full-time · Since March 2022' || persistedReject.analytics.some(isAnalytics)) throw new Error('persisted reject failed');
+await evaluate(persistedReject.sessionId, `document.getElementById('digiturk-tenure').scrollIntoView({behavior:'auto', block:'center'})`);
+await shot(persistedReject.sessionId, 'experience-en-1440');
 await persistedReject.close();
 
 const desktop = await openPage();

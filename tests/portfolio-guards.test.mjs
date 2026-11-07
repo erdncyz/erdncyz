@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
 
 const articleUrls = [
   'https://medium.com/@erdncyz/cloudflare-security-audit-skill-kodlama-ajan%C4%B1n%C4%B1-kan%C4%B1t-isteyen-bir-g%C3%BCvenlik-denet%C3%A7isine-%C3%A7evirmek-fa242e9f96e2',
@@ -15,7 +16,7 @@ const articleUrls = [
 
 function blogSection() {
   const start = html.indexOf('id="blog"');
-  const end = html.indexOf('id="certs"');
+  const end = html.indexOf('id="contact"');
   assert.ok(start > 0 && end > start);
   return html.slice(start, end);
 }
@@ -79,12 +80,57 @@ test('low-risk accessibility hooks are present', () => {
   }
 });
 
-test('career facts, store regions, LinkedIn, and Appium links stay as they were', () => {
-  assert.match(html, />Digiturk</);
-  assert.match(html, /Full-time · 4 yrs 11 mos/);
-  assert.match(html, /Jun 2025 - Present/);
-  assert.match(html, /Mar 2022 - Present/);
-  assert.match(html, /beIN Media Group/);
+test('profile matches the sourced LinkedIn fields and owner employment correction', () => {
+  const experience = html.slice(html.indexOf('id="experience"'), html.indexOf('id="education"'));
+  const duties = experience.split('id="experience-duties"')[1].split('</ul>')[0];
+  assert.equal(duties.split('<li').length - 1, 10);
+  assert.equal((experience.match(/<h3[^>]*>Software Test Automation Engineer<\/h3>/g) || []).length, 1);
+  assert.equal(html.includes('Mobile Application Developer'), false);
+  assert.equal(html.includes('Jun 2025'), false);
+  assert.equal(html.includes('Haz 2025'), false);
+  assert.equal(html.includes('>Ongoing<'), false);
+  assert.equal(html.includes('Devam Ediyor'), false);
+  assert.equal(html.includes('currently pursuing'), false);
+  assert.equal(html.includes('id="certs"'), false);
+  assert.equal(html.includes('Mindset Institute'), false);
+  assert.equal(html.includes('Completed Certifications'), false);
+  assert.equal(html.includes('w-[90%]'), false);
+  assert.match(html, /id="digiturk-tenure"[^>]*data-tr="Tam zamanlı · Mart 2022’den beri"/);
+  assert.match(html, /data-en="Full-time · Since March 2022"/);
+  assert.match(experience, /Mar 2022 - Present/);
+  assert.match(experience, /<\/i> Digiturk</);
+  for (const range of ['2018 – Jan 2026', 'Sep 2022 – Sep 2026', '2014 – 2016', 'Jun 2020 – Jun 2022']) {
+    assert.equal(html.includes(range), true, range);
+  }
+  assert.equal(html.includes('graduated'), false);
+  assert.equal(html.split('id="education-list"')[1].split('</div>')[0].split('<article').length - 1, 4);
+  assert.equal(html.split('id="volunteer-list"')[1].split('</ul>')[0].split('<li').length - 1, 3);
+  assert.match(html, /METU Interview Days/);
+  assert.match(html, /METU R&D Society/);
+  assert.match(html, /METU Robotics Society/);
+  assert.match(html, /id="language-en"[^>]*data-en="English — Professional working proficiency"/);
+  assert.equal(html.includes('Native'), false);
+  const skills = [...html.split('id="skill-list"')[1].split('</ul>')[0].matchAll(/<li\b[^>]*>(.*?)<\/li>/gs)];
+  assert.equal(skills.length, 41);
+  const rendered = skills.map(item => item[1].replace(/<[^>]+>/g, '').trim());
+  assert.equal(rendered[0], 'Karate');
+  assert.equal(rendered[6], 'Load Testing');
+  assert.equal(rendered[29], 'İnternational Software Testers Qualification Board');
+  assert.equal(rendered[40], 'Postman API');
+  assert.equal(new Set(rendered).size, 41);
+  for (const href of ['#experience', '#education', '#volunteer', '#skills', '#ios-apps', '#projects', '#blog']) {
+    assert.equal(html.includes(`href="${href}"`), true, href);
+  }
+  assert.equal(html.includes('href="#certs"'), false);
+  assert.match(html, /id="ios-apps"/);
+  assert.match(html, /id="blog"/);
+  assert.match(readme, /since March 2022/);
+  assert.match(readme, /İnternational Software Testers Qualification Board/);
+  assert.equal(readme.includes('Mindset Institute'), false);
+  assert.equal(readme.includes('4 years 11 months'), false);
+});
+
+test('identity links and unrelated claims stay in place', () => {
   assert.match(html, /https:\/\/www\.linkedin\.com\/in\/erdinç-yılmaz-b07582152\//);
   assert.match(html, /https:\/\/github\.com\/erdncyz\/appium-device-farm/);
   assert.match(html, /https:\/\/apps\.apple\.com\/tr\/app\/yol-maliyetin\/id6804384620/);

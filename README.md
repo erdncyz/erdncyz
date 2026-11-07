@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">Hi there, I'm Erdinç Yılmaz! 👋</h1>
-  <h3 align="center">Software Test Automation Engineer | Mobile Developer</h3>
+  <h3 align="center">Software Test Automation Engineer | iOS, Android & Web Developer | Open Source Contributor | AI Agents, MCP & Local LLM</h3>
   
   <p align="center"> 
     <img src="https://komarev.com/ghpvc/?username=erdncyz&style=flat-square&color=blue" alt="erdncyz" /> 
@@ -23,62 +23,41 @@
 
 ### 🚀 About Me
 
-I am a passionate **Software Test Automation Engineer** and **Mobile Developer** based in Turkey. I specialize in building robust test automation frameworks and developing native mobile applications. I am also an active **Open Source Contributor**, particularly for the Appium ecosystem.
+**Software Test Automation Engineer** at Digiturk, İstanbul. I manage web and mobile (iOS and Android) client testing for high-traffic platforms such as beIN Sports Connect and TOD. I also develop mobile applications (Swift/SwiftUI, Kotlin) and web projects, contribute to the Appium ecosystem, and work on AI Agents, MCP, and local LLMs.
 
-- � I’m currently working on **Mobile Development, Test Automation & AI**
-- 🌱 I’m currently learning **AI Fluency, Prompt Engineering & Claude Code**
-- 👯 I’m looking to collaborate on **Open Source Mobile Test Tools**
-- 💬 Ask me about **Appium, Selenium, iOS, and Test Automation**
-
----
-
-### 🛠️ Languages & Tools
-
-<div align="center">
-
-**Mobile Development**
-<br>
-<img src="https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white" />
-<img src="https://img.shields.io/badge/SwiftUI-000000?style=for-the-badge&logo=swift&logoColor=blue" />
-<img src="https://img.shields.io/badge/Kotlin-0095D5?style=for-the-badge&logo=kotlin&logoColor=white" />
-<img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
-<img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" />
-
-**AI Knowledge & Tools**
-<br>
-Prompt Engineering · AI Fluency · Claude · Anthropic API · Claude Code · AI-assisted Development
-
-**Test Automation**
-<br>
-<img src="https://img.shields.io/badge/Appium-4195B3?style=for-the-badge&logo=appium&logoColor=white" />
-<img src="https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white" />
-<img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" />
-<img src="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white" />
-<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" />
-
-**Languages & Backend**
-<br>
-<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
-<img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white" />
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-
-</div>
-
----
-
-### 🧠 AI Training
-
-- Prompt Engineering and AI Applications — Mindset Institute (12 hours)
-- AI Fluency: Framework & Foundations — Anthropic
-- Claude with the Anthropic API — Anthropic
-- Claude 101 — Anthropic
-- Claude Code in Action — Anthropic
+Study listed separately below uses date ranges only. An end date is not a graduation claim.
 
 ### 💼 Experience
 
-**Digiturk — 4 years 11 months**
+**Digiturk — Software Test Automation Engineer, full-time, since March 2022 (present)**  
+İstanbul, Türkiye. One role. Duties match the site experience list, including APAC beIN Sports Connect, BeinConnect, TOD, Partner Login, Google Play Billing, MUX, Braze, internal tools such as mercury-farm, and AI agent support.
+
+### 🎓 Education
+
+Date ranges only:
+
+- Middle East Technical University — Bachelor's degree, Geological Engineering — 2018 – Jan 2026
+- Anadolu University — Bachelor's degree, Management Information Systems, General — Sep 2022 – Sep 2026
+- Fırat University — Associate degree, Surveying Technology/Surveying — 2014 – 2016
+- Anadolu University — Associate degree, Elderly Care — Jun 2020 – Jun 2022
+
+### 🤝 Volunteering
+
+No dates were listed.
+
+- Assistant — METU Interview Days — Education
+- Assistant — METU R&D Society — Science and Technology
+- Assistant — METU Robotics Society — Science and Technology
+
+### 🗣️ Language
+
+English — Professional working proficiency
+
+### 🛠️ LinkedIn skill list (41)
+
+Karate; Jmeter; Scala; Gatling; IntelliJ IDEA; Java; Load Testing; LoadRunner; Agile Methods; Test Automation; Regression Testing; Azure DevOps; Mobile Applications; Ruby; Scrum; Microsoft Office; Customer Service; Management; Research; Project Management; Strategic Planning; Public Speaking; netcad; arge; Photography; Microsoft Excel; AutoCAD; WordPress; Python; İnternational Software Testers Qualification Board; SQL; Microsoft SQL Server; Jira; Jira Service Desk; Jira Align; Confluence; Toad; Toad 9.0; Toad Data Modeler; SOAP; Postman API
+
+The last testing-board entry is a listed skill name, not a certificate. LinkedIn certifications are empty. Summary competencies that are not in this list include Appium, Selenium, Swift/SwiftUI, Kotlin, AI Agents, MCP, and local LLMs.
 
 ---
 
@@ -91,12 +70,9 @@ Prompt Engineering · AI Fluency · Claude · Anthropic API · Claude Code · AI
 
 ---
 
-### 🌟 Open Source Contributions
+### 🌟 Portfolio
 
-I actively contribute to the community. Here are some projects I've been involved with:
-
-- **[Appium Device Farm](https://github.com/appium/appium-device-farm):** Contributing to the management of device farms for Appium.
-- **[Appium Browser Plugin](https://github.com/erdncyz/appium-browser-plugin):** A plugin to control browsers manually during Appium sessions.
+Open-source work named in the role includes the Appium ecosystem and [mercury-farm](https://github.com/erdncyz/mercury-farm). Apps, repositories, and Medium articles remain on the website; LinkedIn has no project section to copy.
 
 ---
 
