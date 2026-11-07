@@ -78,7 +78,7 @@ Prompt Engineering · AI Fluency · Claude · Anthropic API · Claude Code · AI
 
 ### 💼 Experience
 
-**Digiturk — 4 years 11 months**
+**Digiturk — Software Test Automation Engineer, since March 2022**
 
 ---
 

@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8');
 
 const articleUrls = [
   'https://medium.com/@erdncyz/cloudflare-security-audit-skill-kodlama-ajan%C4%B1n%C4%B1-kan%C4%B1t-isteyen-bir-g%C3%BCvenlik-denet%C3%A7isine-%C3%A7evirmek-fa242e9f96e2',
@@ -79,12 +80,28 @@ test('low-risk accessibility hooks are present', () => {
   }
 });
 
-test('career facts, store regions, LinkedIn, and Appium links stay as they were', () => {
-  assert.match(html, />Digiturk</);
-  assert.match(html, /Full-time · 4 yrs 11 mos/);
-  assert.match(html, /Jun 2025 - Present/);
-  assert.match(html, /Mar 2022 - Present/);
-  assert.match(html, /beIN Media Group/);
+test('Digiturk tenure follows the owner date, without a stale month total', () => {
+  const mobile = html.slice(html.indexOf('Job 1 - Current: Mobile Application Developer'), html.indexOf('Job 2 - Current: Software Test Automation Engineer'));
+  const automation = html.slice(html.indexOf('Job 2 - Current: Software Test Automation Engineer'), html.indexOf('id="whatido"'));
+  assert.match(html, /id="digiturk-tenure"[^>]*data-tr="Tam zamanlı · Mart 2022’den beri"/);
+  assert.match(html, /data-en="Full-time · Since March 2022"/);
+  assert.equal(html.includes('4 yrs 11 mos'), false);
+  assert.equal(html.includes('4 yıl 11 ay'), false);
+  assert.match(automation, /<\/i> Digiturk</);
+  assert.match(automation, /Mar 2022 - Present/);
+  assert.match(automation, /Mar 2022 - Halen/);
+  assert.equal(automation.includes('beIN Media Group'), false);
+  assert.match(mobile, /beIN Media Group/);
+  assert.match(mobile, /Jun 2025 - Present/);
+  assert.match(mobile, /Haz 2025 - Halen/);
+  assert.match(html, /METU - Geological Engineering/);
+  assert.match(html, /Anadolu University - MIS/);
+  assert.match(html, /data-en="Ongoing"/);
+  assert.match(readme, /Digiturk — Software Test Automation Engineer, since March 2022/);
+  assert.equal(readme.includes('4 years 11 months'), false);
+});
+
+test('identity links and unrelated claims stay in place', () => {
   assert.match(html, /https:\/\/www\.linkedin\.com\/in\/erdinç-yılmaz-b07582152\//);
   assert.match(html, /https:\/\/github\.com\/erdncyz\/appium-device-farm/);
   assert.match(html, /https:\/\/apps\.apple\.com\/tr\/app\/yol-maliyetin\/id6804384620/);
