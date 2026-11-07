@@ -176,10 +176,9 @@ function layoutScript() {
       blogTop: blogHeading ? Math.round(blogHeading.getBoundingClientRect().top) : null,
       blogText: blogHeading ? blogHeading.textContent.slice(0, 48) : null,
       lang: document.documentElement.lang,
-      hero: document.querySelector('#about p')?.innerText.slice(0, 42),
+      hero: document.querySelector('#about p')?.innerText.slice(0, 180),
       blogIntro: document.querySelector('#blog p')?.innerText.slice(0, 70),
       tenure: document.getElementById('digiturk-tenure')?.textContent.trim(),
-      mobileEmployer: document.body.innerText.includes('Mobile Application Developer') && document.body.innerText.includes('Jun 2025 - Present'),
       typing: document.getElementById('typing-text')?.textContent,
       motion: document.documentElement.classList.contains('motion-ok'),
       menuExpanded: document.getElementById('mobile-menu-btn')?.getAttribute('aria-expanded'),
@@ -224,7 +223,7 @@ await evaluate(fresh.sessionId, `document.getElementById('lang-tr').click()`);
 const turkish = await evaluate(fresh.sessionId, layoutScript());
 await shot(fresh.sessionId, 'after-mobile-tr');
 record('tr', { lang: turkish.lang, hero: turkish.hero, blogIntro: turkish.blogIntro, menu: turkish.menuLabel, tenure: turkish.tenure });
-if (turkish.lang !== 'tr' || !turkish.hero.includes('Yüksek trafikli') || !turkish.blogIntro.includes('Yapay zeka destekli') || !turkish.tenure.includes('Mart 2022’den beri')) {
+if (turkish.lang !== 'tr' || !turkish.hero.includes('yüksek trafikli') || !turkish.blogIntro.includes('Yapay zeka destekli') || !turkish.tenure.includes('Mart 2022’den beri')) {
   throw new Error('Turkish toggle failed');
 }
 await evaluate(fresh.sessionId, `document.getElementById('digiturk-tenure').scrollIntoView({behavior:'auto', block:'center'})`);

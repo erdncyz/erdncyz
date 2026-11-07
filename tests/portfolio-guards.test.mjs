@@ -16,7 +16,7 @@ const articleUrls = [
 
 function blogSection() {
   const start = html.indexOf('id="blog"');
-  const end = html.indexOf('id="certs"');
+  const end = html.indexOf('id="contact"');
   assert.ok(start > 0 && end > start);
   return html.slice(start, end);
 }
@@ -80,24 +80,53 @@ test('low-risk accessibility hooks are present', () => {
   }
 });
 
-test('Digiturk tenure follows the owner date, without a stale month total', () => {
-  const mobile = html.slice(html.indexOf('Job 1 - Current: Mobile Application Developer'), html.indexOf('Job 2 - Current: Software Test Automation Engineer'));
-  const automation = html.slice(html.indexOf('Job 2 - Current: Software Test Automation Engineer'), html.indexOf('id="whatido"'));
+test('profile matches the sourced LinkedIn fields and owner employment correction', () => {
+  const experience = html.slice(html.indexOf('id="experience"'), html.indexOf('id="education"'));
+  const duties = experience.split('id="experience-duties"')[1].split('</ul>')[0];
+  assert.equal(duties.split('<li').length - 1, 10);
+  assert.equal((experience.match(/<h3[^>]*>Software Test Automation Engineer<\/h3>/g) || []).length, 1);
+  assert.equal(html.includes('Mobile Application Developer'), false);
+  assert.equal(html.includes('Jun 2025'), false);
+  assert.equal(html.includes('Haz 2025'), false);
+  assert.equal(html.includes('>Ongoing<'), false);
+  assert.equal(html.includes('Devam Ediyor'), false);
+  assert.equal(html.includes('currently pursuing'), false);
+  assert.equal(html.includes('id="certs"'), false);
+  assert.equal(html.includes('Mindset Institute'), false);
+  assert.equal(html.includes('Completed Certifications'), false);
+  assert.equal(html.includes('w-[90%]'), false);
   assert.match(html, /id="digiturk-tenure"[^>]*data-tr="Tam zamanlı · Mart 2022’den beri"/);
   assert.match(html, /data-en="Full-time · Since March 2022"/);
-  assert.equal(html.includes('4 yrs 11 mos'), false);
-  assert.equal(html.includes('4 yıl 11 ay'), false);
-  assert.match(automation, /<\/i> Digiturk</);
-  assert.match(automation, /Mar 2022 - Present/);
-  assert.match(automation, /Mar 2022 - Halen/);
-  assert.equal(automation.includes('beIN Media Group'), false);
-  assert.match(mobile, /beIN Media Group/);
-  assert.match(mobile, /Jun 2025 - Present/);
-  assert.match(mobile, /Haz 2025 - Halen/);
-  assert.match(html, /METU - Geological Engineering/);
-  assert.match(html, /Anadolu University - MIS/);
-  assert.match(html, /data-en="Ongoing"/);
-  assert.match(readme, /Digiturk — Software Test Automation Engineer, since March 2022/);
+  assert.match(experience, /Mar 2022 - Present/);
+  assert.match(experience, /<\/i> Digiturk</);
+  for (const range of ['2018 – Jan 2026', 'Sep 2022 – Sep 2026', '2014 – 2016', 'Jun 2020 – Jun 2022']) {
+    assert.equal(html.includes(range), true, range);
+  }
+  assert.equal(html.includes('graduated'), false);
+  assert.equal(html.split('id="education-list"')[1].split('</div>')[0].split('<article').length - 1, 4);
+  assert.equal(html.split('id="volunteer-list"')[1].split('</ul>')[0].split('<li').length - 1, 3);
+  assert.match(html, /METU Interview Days/);
+  assert.match(html, /METU R&D Society/);
+  assert.match(html, /METU Robotics Society/);
+  assert.match(html, /id="language-en"[^>]*data-en="English — Professional working proficiency"/);
+  assert.equal(html.includes('Native'), false);
+  const skills = [...html.split('id="skill-list"')[1].split('</ul>')[0].matchAll(/<li\b[^>]*>(.*?)<\/li>/gs)];
+  assert.equal(skills.length, 41);
+  const rendered = skills.map(item => item[1].replace(/<[^>]+>/g, '').trim());
+  assert.equal(rendered[0], 'Karate');
+  assert.equal(rendered[6], 'Load Testing');
+  assert.equal(rendered[29], 'İnternational Software Testers Qualification Board');
+  assert.equal(rendered[40], 'Postman API');
+  assert.equal(new Set(rendered).size, 41);
+  for (const href of ['#experience', '#education', '#volunteer', '#skills', '#ios-apps', '#projects', '#blog']) {
+    assert.equal(html.includes(`href="${href}"`), true, href);
+  }
+  assert.equal(html.includes('href="#certs"'), false);
+  assert.match(html, /id="ios-apps"/);
+  assert.match(html, /id="blog"/);
+  assert.match(readme, /since March 2022/);
+  assert.match(readme, /İnternational Software Testers Qualification Board/);
+  assert.equal(readme.includes('Mindset Institute'), false);
   assert.equal(readme.includes('4 years 11 months'), false);
 });
 
