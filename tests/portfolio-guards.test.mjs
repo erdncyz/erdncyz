@@ -118,9 +118,13 @@ test('profile matches the sourced LinkedIn fields and owner employment correctio
   assert.equal(rendered[29], 'İnternational Software Testers Qualification Board');
   assert.equal(rendered[40], 'Postman API');
   assert.equal(new Set(rendered).size, 41);
-  for (const href of ['#experience', '#education', '#volunteer', '#skills', '#ios-apps', '#projects', '#blog']) {
+  for (const href of ['#experience', '#education', '#volunteer', '#skills', '#ios-apps', '#projects', '#blog', '#hobbies']) {
     assert.equal(html.includes(`href="${href}"`), true, href);
   }
+  assert.match(html, /id="hobbies"/);
+  assert.match(html, /data-en="Rowing"/);
+  assert.match(html, /data-en="Photography"/);
+  assert.match(html, /data-en="3D Printing & Model Painting"/);
   assert.equal(html.includes('href="#certs"'), false);
   assert.match(html, /id="ios-apps"/);
   assert.match(html, /id="blog"/);
